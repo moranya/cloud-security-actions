@@ -1,0 +1,17 @@
+name: Tenable Scan
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Scan container image with Tenable Cloud Security
+        uses: moranya/cloud-security-actions/container-image/scan@v1
+        with:
+          api-token: ${{ secrets.TENABLE_API_TOKEN }}
+          api-url: https://us10.dev.app.ermetic.com
+          name: wordpress
